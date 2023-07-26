@@ -1,0 +1,235 @@
+export declare const ElForm: import("../../utils/types").SFCWithInstall<import("vue").DefineComponent<{
+    model: ObjectConstructor;
+    rules: import("vue").PropType<import("./src/form.type").FormRulesMap>;
+    labelPosition: StringConstructor;
+    labelWidth: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: string;
+    };
+    labelSuffix: {
+        type: StringConstructor;
+        default: string;
+    };
+    inline: BooleanConstructor;
+    inlineMessage: BooleanConstructor;
+    statusIcon: BooleanConstructor;
+    showMessage: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    size: import("vue").PropType<import("../../utils/types").ComponentSize>;
+    disabled: BooleanConstructor;
+    validateOnRuleChange: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    hideRequiredAsterisk: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    scrollToError: BooleanConstructor;
+}, {
+    validate: (callback?: import("./src/form.vue").Callback | undefined) => Promise<boolean> | undefined;
+    resetFields: () => void;
+    clearValidate: (props?: string | string[]) => void;
+    validateField: (props: string | string[], cb: import("../../tokens").ValidateFieldCallback) => void;
+    scrollToField: (prop: string) => void;
+}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "validate"[], "validate", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<{
+    model?: unknown;
+    rules?: unknown;
+    labelPosition?: unknown;
+    labelWidth?: unknown;
+    labelSuffix?: unknown;
+    inline?: unknown;
+    inlineMessage?: unknown;
+    statusIcon?: unknown;
+    showMessage?: unknown;
+    size?: unknown;
+    disabled?: unknown;
+    validateOnRuleChange?: unknown;
+    hideRequiredAsterisk?: unknown;
+    scrollToError?: unknown;
+} & {
+    disabled: boolean;
+    inline: boolean;
+    labelWidth: string | number;
+    labelSuffix: string;
+    inlineMessage: boolean;
+    statusIcon: boolean;
+    showMessage: boolean;
+    validateOnRuleChange: boolean;
+    hideRequiredAsterisk: boolean;
+    scrollToError: boolean;
+} & {
+    size?: import("../../utils/types").ComponentSize | undefined;
+    model?: Record<string, any> | undefined;
+    labelPosition?: string | undefined;
+    rules?: import("./src/form.type").FormRulesMap | undefined;
+}> & {
+    onValidate?: ((...args: any[]) => any) | undefined;
+}, {
+    disabled: boolean;
+    inline: boolean;
+    labelWidth: string | number;
+    labelSuffix: string;
+    inlineMessage: boolean;
+    statusIcon: boolean;
+    showMessage: boolean;
+    validateOnRuleChange: boolean;
+    hideRequiredAsterisk: boolean;
+    scrollToError: boolean;
+}>> & {
+    FormItem: import("vue").DefineComponent<{
+        label: StringConstructor;
+        labelWidth: {
+            type: (NumberConstructor | StringConstructor)[];
+            default: string;
+        };
+        prop: StringConstructor;
+        required: {
+            type: BooleanConstructor;
+            default: undefined;
+        };
+        rules: import("vue").PropType<import("./src/form.type").FormItemRule | import("./src/form.type").FormItemRule[]>;
+        error: StringConstructor;
+        validateStatus: StringConstructor;
+        for: StringConstructor;
+        inlineMessage: {
+            type: (BooleanConstructor | StringConstructor)[];
+            default: string;
+        };
+        showMessage: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        size: {
+            type: import("vue").PropType<import("../../utils/types").ComponentSize>;
+            validator: (val: string) => boolean;
+        };
+    }, {
+        formItemRef: import("vue").Ref<HTMLDivElement | undefined>;
+        formItemClass: import("vue").ComputedRef<(string | {
+            'el-form-item--feedback': boolean | undefined;
+            'is-error': boolean;
+            'is-validating': boolean;
+            'is-success': boolean;
+            'is-required': boolean | undefined;
+            'is-no-asterisk': boolean | undefined;
+        })[]>;
+        shouldShowError: import("vue").ComputedRef<boolean | undefined>;
+        elForm: import("../../tokens").ElFormContext;
+        labelStyle: import("vue").ComputedRef<import("vue").CSSProperties>;
+        contentStyle: import("vue").ComputedRef<import("vue").CSSProperties>;
+        validateMessage: import("vue").Ref<string>;
+        labelFor: import("vue").ComputedRef<string | undefined>;
+        resetField: () => void;
+        clearValidate: () => void;
+    }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<{
+        label?: unknown;
+        labelWidth?: unknown;
+        prop?: unknown;
+        required?: unknown;
+        rules?: unknown;
+        error?: unknown;
+        validateStatus?: unknown;
+        for?: unknown;
+        inlineMessage?: unknown;
+        showMessage?: unknown;
+        size?: unknown;
+    } & {
+        labelWidth: string | number;
+        inlineMessage: string | boolean;
+        showMessage: boolean;
+    } & {
+        required?: boolean | undefined;
+        error?: string | undefined;
+        size?: import("../../utils/types").ComponentSize | undefined;
+        label?: string | undefined;
+        rules?: import("./src/form.type").FormItemRule | import("./src/form.type").FormItemRule[] | undefined;
+        prop?: string | undefined;
+        validateStatus?: string | undefined;
+        for?: string | undefined;
+    }>, {
+        required: boolean;
+        labelWidth: string | number;
+        inlineMessage: string | boolean;
+        showMessage: boolean;
+    }>;
+};
+export default ElForm;
+export declare const ElFormItem: import("../../utils/types").SFCWithInstall<import("vue").DefineComponent<{
+    label: StringConstructor;
+    labelWidth: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: string;
+    };
+    prop: StringConstructor;
+    required: {
+        type: BooleanConstructor;
+        default: undefined;
+    };
+    rules: import("vue").PropType<import("./src/form.type").FormItemRule | import("./src/form.type").FormItemRule[]>;
+    error: StringConstructor;
+    validateStatus: StringConstructor;
+    for: StringConstructor;
+    inlineMessage: {
+        type: (BooleanConstructor | StringConstructor)[];
+        default: string;
+    };
+    showMessage: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    size: {
+        type: import("vue").PropType<import("../../utils/types").ComponentSize>;
+        validator: (val: string) => boolean;
+    };
+}, {
+    formItemRef: import("vue").Ref<HTMLDivElement | undefined>;
+    formItemClass: import("vue").ComputedRef<(string | {
+        'el-form-item--feedback': boolean | undefined;
+        'is-error': boolean;
+        'is-validating': boolean;
+        'is-success': boolean;
+        'is-required': boolean | undefined;
+        'is-no-asterisk': boolean | undefined;
+    })[]>;
+    shouldShowError: import("vue").ComputedRef<boolean | undefined>;
+    elForm: import("../../tokens").ElFormContext;
+    labelStyle: import("vue").ComputedRef<import("vue").CSSProperties>;
+    contentStyle: import("vue").ComputedRef<import("vue").CSSProperties>;
+    validateMessage: import("vue").Ref<string>;
+    labelFor: import("vue").ComputedRef<string | undefined>;
+    resetField: () => void;
+    clearValidate: () => void;
+}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<{
+    label?: unknown;
+    labelWidth?: unknown;
+    prop?: unknown;
+    required?: unknown;
+    rules?: unknown;
+    error?: unknown;
+    validateStatus?: unknown;
+    for?: unknown;
+    inlineMessage?: unknown;
+    showMessage?: unknown;
+    size?: unknown;
+} & {
+    labelWidth: string | number;
+    inlineMessage: string | boolean;
+    showMessage: boolean;
+} & {
+    required?: boolean | undefined;
+    error?: string | undefined;
+    size?: import("../../utils/types").ComponentSize | undefined;
+    label?: string | undefined;
+    rules?: import("./src/form.type").FormItemRule | import("./src/form.type").FormItemRule[] | undefined;
+    prop?: string | undefined;
+    validateStatus?: string | undefined;
+    for?: string | undefined;
+}>, {
+    required: boolean;
+    labelWidth: string | number;
+    inlineMessage: string | boolean;
+    showMessage: boolean;
+}>>;
