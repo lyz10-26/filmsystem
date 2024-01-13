@@ -3,6 +3,8 @@
 ## 毕业设计
 
 本项目是一个基于Java语言开发的电影推荐系统，对用户实现精准推送。
+![image](https://github.com/lyz10-26/filmsystem/assets/101388237/01163239-3797-4a6a-94c2-5bc9c331d66a)
+
 
 ## 环境
 + jdk11
