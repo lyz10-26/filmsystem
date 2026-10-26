@@ -2,7 +2,6 @@ package top.lyzlove.controller;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.IdUtil;
-import cn.hutool.core.util.StrUtil;
 import top.lyzlove.common.Result;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.util.List;
 
@@ -22,36 +20,40 @@ public class FileController {
     private String port;
 
     private static final String ip = "http://localhost";
+    private static final String FILES_DIRECTORY = "/spring/src/main/resources/files/";
 
     @PostMapping("/upload")
     public Result<?> upload(MultipartFile file) throws IOException {
         String originalFilename = file.getOriginalFilename();
         String flag = IdUtil.fastSimpleUUID();
-        String rootFilePath = System.getProperty("user.dir") + "/spring/src/main/resources/files/" + flag + "_" + originalFilename;
-        System.out.println(rootFilePath);
+        String rootFilePath = System.getProperty("user.dir") + FILES_DIRECTORY + flag + "_" + originalFilename;
         FileUtil.writeBytes(file.getBytes(), rootFilePath);
         return Result.success(ip + ":" + port + "/files/" + flag);
     }
 
     @GetMapping("/{flag}")
-    public void getFiles(@PathVariable String flag, HttpServletResponse response) {
-        OutputStream os;  // 新建一个输出流对象
-        String basePath = System.getProperty("user.dir") + "/spring/src/main/resources/files/";  // 定于文件上传的根路径
-        List<String> fileNames = FileUtil.listFileNames(basePath);  // 获取所有的文件名称
-        String fileName = fileNames.stream().filter(name -> name.contains(flag)).findAny().orElse("");  // 找到跟参数一致的文件
-        try {
-            if (StrUtil.isNotEmpty(fileName)) {
-                response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
-                response.setContentType("application/octet-stream");
-                byte[] bytes = FileUtil.readBytes(basePath + fileName);  // 通过文件的路径读取文件字节流
-                os = response.getOutputStream();   // 通过输出流返回文件
-                os.write(bytes);
-                os.flush();
-                os.close();
-            }
-        } catch (Exception e) {
-            System.out.println("文件下载失败");
+    public void getFiles(@PathVariable String flag, HttpServletResponse response) throws IOException {
+        // Upload IDs are lowercase hex UUIDs without hyphens.
+        if (!flag.matches("[0-9a-f]{32}")) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid file identifier");
+            return;
         }
-    }
 
+        String basePath = System.getProperty("user.dir") + FILES_DIRECTORY;
+        List<String> fileNames = FileUtil.listFileNames(basePath);
+        String fileName = fileNames.stream()
+                .filter(name -> name.startsWith(flag + "_"))
+                .findFirst()
+                .orElse(null);
+
+        if (fileName == null) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "File not found");
+            return;
+        }
+
+        response.setHeader("Content-Disposition",
+                "attachment; filename*=UTF-8''" + URLEncoder.encode(fileName, "UTF-8").replace("+", "%20"));
+        response.setContentType("application/octet-stream");
+        FileUtil.writeToStream(FileUtil.file(basePath, fileName), response.getOutputStream());
+    }
 }
